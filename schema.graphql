@@ -1,0 +1,42 @@
+type Listing @entity {
+  id: ID!
+  status: ListingStatus!
+  tokenId: BigInt!
+  seller: Bytes!
+  initialBid: BigInt!
+  highestBid: BigInt!
+  bids: [Bid!]!
+  minimumBidIncrement: BigInt!
+  endDate: BigInt!
+  listedAt: BigInt!
+}
+
+type Bid @entity {
+  id: ID!
+  status: BidStatus!
+  listing: Listing!
+  bidder: Bytes!
+  amount: BigInt!
+  bidAt: BigInt!
+}
+
+type Token @entity {
+  id: ID!
+  name: String!
+  image: String!
+  listed: Boolean!
+  owner: Bytes!
+}
+
+enum BidStatus {
+  Win
+  Failed
+  Active
+  Inactive
+}
+
+enum ListingStatus {
+  Open
+  Closed
+  Failed
+}

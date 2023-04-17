@@ -1,0 +1,54 @@
+specVersion: 0.0.4
+schema:
+  file: schema.graphql
+dataSources:
+  - kind: ethereum
+    name: DiffusedMarketplace
+    network: goerli
+    source:
+      address: "0xefE971E5C9C2385e116e368e747A2043d795aFC4"
+      abi: DiffusedMarketplace
+      startBlock: 8111396
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - ListingBid
+        - ListingClosed
+        - TokenListed
+      abis:
+        - name: DiffusedMarketplace
+          file: DiffusedMarketplace/abis/DiffusedMarketplace.json
+      eventHandlers:
+        - event: ListingBid(indexed uint256,uint256,indexed address,uint256,indexed uint256)
+          handler: handleListingBid
+        - event: ListingClosed(indexed uint256,uint256,(address,uint256,uint256))
+          handler: handleListingClosed
+        - event: TokenListed(indexed uint256,indexed address,uint256,uint256,indexed
+            uint256,(address,uint256,uint256))
+          handler: handleTokenListed
+      file: DiffusedMarketplace/DiffusedMarketplace.wasm
+  - kind: ethereum
+    name: DiffusedNfts
+    network: goerli
+    source:
+      address: "0x8a624d120ebc698cc342f97300aeca2e26c0d48b"
+      abi: DiffusedNfts
+      startBlock: 8092769
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - MintedNft
+        - Transfer
+      abis:
+        - name: DiffusedNfts
+          file: DiffusedNfts/abis/DiffusedNfts.json
+      eventHandlers:
+        - event: MintedNft(indexed uint256,indexed address)
+          handler: handleMintedNft
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+      file: DiffusedNfts/DiffusedNfts.wasm

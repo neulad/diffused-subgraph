@@ -1,0 +1,10 @@
+{
+  "goerli": {
+    "DiffusedMarketplace": {
+      "address": "0xefE971E5C9C2385e116e368e747A2043d795aFC4"
+    },
+    "DiffusedNfts": {
+      "address": "0x8a624d120ebc698cc342f97300aeca2e26c0d48b"
+    }
+  }
+}
